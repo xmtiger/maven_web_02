@@ -178,6 +178,25 @@
             <version>2.6.5-RC2</version>
         </dependency>
         <dependency>
+
+            <groupId>htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <version>1.13</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-htmlunit-driver</artifactId>
+            <version>2.52.0</version>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+            <!--scope>test</scope-->
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>

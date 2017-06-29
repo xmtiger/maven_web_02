@@ -65,7 +65,7 @@ public class UserController {
         this.userService = userService;
     }
     
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/index.html", method = RequestMethod.GET)
     public String index(Model model){
         logger.debug("index()");
         return "redirect:/users";
@@ -156,15 +156,19 @@ public class UserController {
     }
     
     //show user
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public String showUser(@PathVariable("id") int id, Model model){
         
         logger.debug("showUser() id: {}", id);
         
         User user = userService.findById(id);
         if(user == null){
+            logger.debug("user was not found");
             model.addAttribute("css", "danger");
             model.addAttribute("msg", "User not found");
+        }
+        else{
+            logger.debug(user.toString());
         }
         model.addAttribute("user", user);
         
@@ -178,7 +182,7 @@ public class UserController {
         frameworksList.add("Struts 2");
         frameworksList.add("JSF 2");
         
-        model.addAttribute("frameworksList", frameworksList);
+        model.addAttribute("frameworkList", frameworksList);
         
         Map<String, String> skill = new LinkedHashMap();
         skill.put("Hibernate", "Hibernate");
@@ -190,6 +194,7 @@ public class UserController {
         numbers.add(1);
         numbers.add(2);
         numbers.add(3);
+        model.addAttribute("numberList", numbers);
         
         Map<String, String> country = new LinkedHashMap();
         country.put("US", "United States");
