@@ -124,7 +124,7 @@ public class FormTests {
             .andExpect(model().attributeExists("user"));
     }
     
-    //@Test
+    @Test
     public void test_update_action() throws Exception{  
         mockMvc.perform(get("/users/100/update"))
             .andExpect(view().name("users/userform"))
@@ -132,9 +132,10 @@ public class FormTests {
                 
     }
     
-    @Test
+    //@Test
     public void test_update_page() throws Exception{
-        WebClient wc = new WebClient();
-        HtmlPage page = (HtmlPage) wc.getPage("http://localhost:8084/maven_web_02/users/");
+        //WebClient wc = new WebClient();
+        //HtmlPage page = (HtmlPage) wc.getPage("http://localhost:8084/maven_web_02/users/");
+        HtmlPage page = (HtmlPage) webClient.getPage("http://localhost:8084/maven_web_02/users");
     }
 }

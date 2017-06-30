@@ -1,33 +1,28 @@
-<%@taglib session="false" %>
-
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ page session="false"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
     
     <jsp:include page="../fragments/header.jsp"/>
-    <body>
+    
     <div class="container">
         
         <c:choose>
-            <c:when test="${userForm['new']}">
-                <h1>Add User</h1>
-            </c:when>
-                
-                <c:otherwise>
-                    <h1>Update User</h1>                    
-                </c:otherwise>
-            
-        </c:choose>
+		<c:when test="${userForm['new']}">
+			<h1>Add User</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>Update User</h1>
+		</c:otherwise>
+	</c:choose>
         
         <br />
         <spring:url value="/users" var="userActionUrl" />
 
-        <form:form class="form-horizontal" method="post" methodAttribute="userForm" action="${userActionUrl}">
+        <form:form class="form-horizontal" method="post" modelAttribute="userForm" action="${userActionUrl}">
             
             <form:hidden path="id" />
             
@@ -55,7 +50,7 @@
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <label class="col-sm-2 control-label">Password</label>
                     <div class="col-sm-10">
-                        <form:input path="password" class="form-control" id="password" placeholder="password" />
+                        <form:password path="password" class="form-control" id="password" placeholder="password" />
                         <form:errors path="password" class="control-label" />
                     </div>                
                 </div>
@@ -65,8 +60,8 @@
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <label class="col-sm-2 control-label">confirm Password</label>
                     <div class="col-sm-10">
-                        <form:input path="confirmPassword" class="form-control" id="password" placeholder="password" />
-                        <form:errors path="confrimPassword" class="control-label" />
+                        <form:password path="confirmPassword" class="form-control" id="password" placeholder="password" />
+                        <form:errors path="confirmPassword" class="control-label" />
                     </div>                
                 </div>
             </spring:bind>
@@ -75,7 +70,7 @@
                 <div class="form-group ${status.error ? 'has-error' : ''}">
                     <label class="col-sm-2 control-label">Address</label>
                     <div class="col-sm-10">
-                        <form:input path="address" class="form-control" id="address" placeholder="address" />
+                        <form:textarea path="address" class="form-control" id="address" placeholder="address" />
                         <form:errors path="address" class="control-label" />
                     </div>                
                 </div>
@@ -115,6 +110,17 @@
                     </div>                
                 </div>
             </spring:bind>
+            
+            <spring:bind path="number">
+                <div class="form-group" ${status.error ? 'has-error' : ''}">
+                    <label class="col-sm-2 control-label">Number</label>
+                    <div class="col-sm-10">
+                        <form:radiobuttons path="number" items="${numberList}" element="label class='radio-inline'"/>
+                        <br/>
+                        <form:errors path="number" class="control-label" />
+                    </div>
+                </div>
+            </spring:bind>
                     
             <spring:bind path="country">
                 <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -141,7 +147,7 @@
                 </div>
             </spring:bind>
                         
-            <spring:bind path="form-group">
+            <div path="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <c:choose>
                         <c:when test="${userForm['new']}">
@@ -152,7 +158,8 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-            </spring:bind>
+            </div>
+            
                         
         </form:form>
                     
